@@ -8,7 +8,7 @@
       </header>
 
       <TextInput v-model="textInput" />
-      <PhoneticsResult :result="phoneticsResult" />
+      <PhoneticsResult :result="phoneticsResult" v-if="phoneticsResult" />
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@
 <script>
 import PhoneticsResult from '@/components/PhoneticsResult'
 import TextInput from '@/components/TextInput'
-import phonetify from "@/lib/phonetify";
+import phonetify from '@/lib/phonetify'
 
 export default {
   name: 'App',
