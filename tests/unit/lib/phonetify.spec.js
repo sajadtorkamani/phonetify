@@ -1,5 +1,4 @@
-import phonetify, { phonetifyChar } from '@/lib/phonetify'
-import each from 'jest-each'
+import phonetify  from '@/lib/phonetify'
 
 describe('phonetify', () => {
   it('returns phonetic alphabet for each character in the input', function () {
@@ -9,45 +8,17 @@ describe('phonetify', () => {
     expect(phonetify(input)).toEqual(expectedOutput)
   })
 
-  it('returns triple space for each space', function () {
+  it('returns four spaces for each space', function () {
     const input = 'John Doe'
-    const expectedOutput = 'Juliett oscar hotel november   Delta oscar echo'
+    const expectedOutput = 'Juliett oscar hotel november    Delta oscar echo'
 
     expect(phonetify(input)).toEqual(expectedOutput)
   })
-})
 
-describe('phonetifyChar', () => {
-  describe('returns correct phonetic alphabet for lowercase character', () => {
-    each([
-      ['a', 'alfa'],
-      ['z', 'zulu'],
-    ]).test('returns %s when given %s', (input, expectedOutput) => {
-      expect(phonetifyChar(input)).toEqual(expectedOutput)
-    })
-  })
+  it("doesn't convert characters that aren't letters or spaces", function () {
+    const input = 'John123*_-'
+    const expectedOutput = 'Juliett oscar hotel november 1 2 3 * _ -'
 
-  describe('returns correct phonetic alphabet for uppercase character', () => {
-    each([
-      ['A', 'Alfa'],
-      ['Z', 'Zulu'],
-    ]).test('returns %s when given %s', (input, expectedOutput) => {
-      expect(phonetifyChar(input)).toEqual(expectedOutput)
-    })
-  })
-
-  it('returns space for a space', () => {
-    expect(phonetifyChar(' ')).toEqual(' ')
-  })
-
-  describe('returns same char if char is not a letter', () => {
-    each([
-      ['.', '.'],
-      ['1', '1'],
-      ['-', '-'],
-      ['*', '*'],
-    ]).test('returns %s when given %s', (input, expectedOutput) => {
-      expect(phonetifyChar(input)).toEqual(expectedOutput)
-    })
+    expect(phonetify(input)).toEqual(expectedOutput)
   })
 })
